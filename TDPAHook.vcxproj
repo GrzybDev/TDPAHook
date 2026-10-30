@@ -53,6 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp" />
+    <ClCompile Include="src\xapofx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="TDPAHook.Core.vcxproj">
+      <Project>{af1c099d-6c92-4911-9596-3808329ba7f1}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>
