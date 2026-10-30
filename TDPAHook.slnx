@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="TDPAHook.vcxproj" Id="bdbc43f2-a4e0-403b-8cd0-f66dee3b3365" />
+  <Project Path="tests/TDPAHook.Tests.vcxproj" Id="8f227e85-ccda-4a4a-a6aa-2b76328f6afd" />
+</Solution>
