@@ -1,6 +1,7 @@
 #include "redirect.hpp"
 
 #include <algorithm>
+#include <cstdint>
 #include <cstring>
 #include <functional>
 
@@ -8,15 +9,15 @@ namespace tdpahook
 {
 	std::span<std::byte> readOnlyData(const HMODULE module)
 	{
-		auto* const base = reinterpret_cast<std::byte*>(module);
+		const auto base = reinterpret_cast<std::uintptr_t>(module);
 		const auto* const headers =
-			reinterpret_cast<const IMAGE_NT_HEADERS*>(base + reinterpret_cast<const IMAGE_DOS_HEADER*>(base)->e_lfanew);
+			reinterpret_cast<const IMAGE_NT_HEADERS*>(base + reinterpret_cast<const IMAGE_DOS_HEADER*>(module)->e_lfanew);
 
 		for (const IMAGE_SECTION_HEADER& section :
 		     std::span(IMAGE_FIRST_SECTION(headers), headers->FileHeader.NumberOfSections))
 		{
 			if (std::memcmp(section.Name, ".rdata", sizeof(".rdata")) == 0)
-				return {base + section.VirtualAddress, section.Misc.VirtualSize};
+				return {reinterpret_cast<std::byte*>(base + section.VirtualAddress), section.Misc.VirtualSize};
 		}
 
 		return {};
